@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom'
+import { getCityWeather } from '../API';
 
 
-const options = <div>hello options</div>
+const Options: React.FC<{}> = () => {
+
+  useEffect(() => {
+    (
+      async () => {
+        const weather = await getCityWeather('cairo')
+        console.log(weather);
+      }
+    )()
+
+
+  }, [])
+  return <div>hello options</div>
+}
 
 
 const root = document.createElement('div')
 document.body.appendChild(root)
 
-ReactDOM.render(options, root)
+ReactDOM.render(<Options />, root)
