@@ -5,14 +5,11 @@ import { getCityWeather } from '../API';
 
 const Options: React.FC<{}> = () => {
 
+  const getWeather = async () => {
+    const weather = await getCityWeather('cairo')
+    console.log(weather);
+  }
   useEffect(() => {
-    (
-      async () => {
-        const weather = await getCityWeather('cairo')
-        console.log(weather);
-      }
-    )()
-
 
   }, [])
   return <div>hello options</div>

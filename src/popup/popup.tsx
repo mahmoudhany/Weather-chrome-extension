@@ -1,10 +1,21 @@
-import * as React from "react"
-import * as ReactDOM from 'react-dom'
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom'
 import './popup.css'
+import { WeatherCard } from '../WeatherCard/WeatherCard';
 
-const popup = <div>hello world</div>
+const Popup: React.FC<{}> = () => {
+  return (
+    <>
+      <WeatherCard city='cairo' />
+      <WeatherCard city='berlin' />
+      <WeatherCard city='netherlands' />
+      <WeatherCard city='netherlansssds' />
+    </>
+  )
+}
 
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-ReactDOM.render(popup, root)
+
+ReactDOM.render(<Popup />, root)

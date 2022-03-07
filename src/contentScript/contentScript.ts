@@ -1,5 +1,5 @@
 
 
-console.log('contentScript');
+// console.log('contentScript');
 
 // chrome.runtime.sendMessage()

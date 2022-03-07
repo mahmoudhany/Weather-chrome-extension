@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { RootObject } from '../Types';
-const API_KEY = '87fd02e84b090ed6cbc1d1db95f7491f'
+const API_KEY = '791831ebc5fc26f70949b2e0e395db99'
 
-export const getCityWeather = async (city: string = 'london'): Promise<RootObject> => {
-  const response = await axios(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
-
-
-  if (response.status != 200) {
-    throw new Error('error')
+export const getCityWeather = async (city: string): Promise<RootObject | null> => {
+  try {
+    const response = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
+    return response.data
+  } catch (error) {
+    return null
   }
-  return response.data
+
+
 }

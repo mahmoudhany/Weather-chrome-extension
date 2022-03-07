@@ -1,4 +1,3 @@
-
 export interface Coord {
   lon: number;
   lat: number;
@@ -51,4 +50,8 @@ export interface RootObject {
   id: number;
   name: string;
   cod: number;
+  error: any
 }
+
+
+export type WeatherCardState = 'loading' | 'error' | 'ready'
