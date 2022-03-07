@@ -8,7 +8,10 @@ import WeatherCardContainer from './WeatherCardContainer'
 
 
 
-export const WeatherCard: React.FC<{ city: string }> = ({ city }) => {
+export const WeatherCard: React.FC<{
+  city: string,
+  onDelete?: () => void
+}> = ({ city, onDelete }) => {
   const [weather, setWeather] = useState<RootObject | null>(null)
   const [cardState, setCardState] = useState<WeatherCardState>('loading')
 
@@ -27,7 +30,7 @@ export const WeatherCard: React.FC<{ city: string }> = ({ city }) => {
   }, [city])
 
   if (!weather || (cardState == 'loading' || cardState == 'error')) {
-    return <WeatherCardContainer>
+    return <WeatherCardContainer onDelete={onDelete}>
       <Typography variant='body1'>
         {cardState == 'loading' ? 'loading...' : 'City not found'}
       </Typography>
@@ -35,7 +38,7 @@ export const WeatherCard: React.FC<{ city: string }> = ({ city }) => {
   }
 
   return (
-    <WeatherCardContainer>
+    <WeatherCardContainer onDelete={onDelete}>
       <Typography variant='h5'>{weather.name}</Typography>
       <Typography variant='body1'>{Math.round(weather.main.temp)}</Typography>
       <Typography variant='body1'>Feels like: {Math.round(weather.main.feels_like)}</Typography>
