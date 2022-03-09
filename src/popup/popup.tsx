@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import './popup.css'
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { Box } from '@mui/system';
 import { Grid, IconButton, InputBase, Paper } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
+import { setStoredCities, getStoredCities } from '../utilites/storage';
 
 const Popup: React.FC<{}> = () => {
   const [cityInput, setCityInput] = useState<string>('')
-  const [cities, setCities] = useState<string[]>([
-    'cairo',
-    'berlin',
-    'error'
-  ])
+  const [cities, setCities] = useState<string[]>([])
+
+  const getLocalCities = async () => {
+    const cities = await getStoredCities()
+    setCities(cities)
+  }
+  useEffect(() => {
+    getLocalCities()
+  }, [])
+
   const addCity = () => {
-    if (cityInput) {
-      setCities([...cities, cityInput])
-      setCityInput('')
+    if (!cityInput) {
+      return
     }
+    const updateCities = [...cities, cityInput]
+    setStoredCities(updateCities)
+      .then(() => {
+        setCities(updateCities)
+        setCityInput('')
+      })
   }
 
   const deleteCity = (index: number) => {
     cities.splice(index, 1)
-    setCities([...cities])
+    const updatedCities = [...cities]
+    setStoredCities(updatedCities)
+      .then(() => {
+        setCities(updatedCities)
+      })
   }
 
   return (

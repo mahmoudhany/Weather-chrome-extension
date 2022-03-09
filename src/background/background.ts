@@ -1,3 +1,5 @@
+import { setStoredCities } from '../utilites/storage';
 
-
-// console.log('background');
+chrome.runtime.onInstalled.addListener(() =>
+  setStoredCities([])
+)
